@@ -12,10 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/events');
 });
 
-Route::get('/user', 'AdminController@index');
+Route::get('/admin', 'AdminController@index');
+
+
+Route::get('/export/{id}', 'AdminController@export');
 
 Route::resources([
     'events' => 'EventController',

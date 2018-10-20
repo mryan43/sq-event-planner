@@ -14,10 +14,9 @@ class CreateRegistrationValuesTable extends Migration
     public function up()
     {
         Schema::create('registration_values', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('event_registration_id')->unsigned();
             $table->integer('field_id')->unsigned();
-            $table->string('value');
+            $table->string('value')->nullable();
             $table->timestamps();
         });
 

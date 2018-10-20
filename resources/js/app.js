@@ -7,16 +7,34 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+function updateFormVisibility(){
+    var participation = $("input[name=field-1]:checked");
+    if (participation.val() === "Yes"){
+        $("#participant-form").show();
+    } else {
+        $("#participant-form").hide();
+    }
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+    $("form input").each(function(){
+        var input = $(this);
+        var group = $(this).closest(".form-group");
+        var condition = group.attr("data-condition");
+        if (condition !== undefined && condition !== ""){
+            group.hide();
+            var inputId = condition.split(":")[0];
+            var expectedValue = condition.split(":")[1];
+            if ($("input[name=field-"+inputId+"]:checked").val() === expectedValue){
+                group.show();
+            } else {
+                group.hide();
+            }
+        }
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+    });
 
-const app = new Vue({
-    el: '#app'
+}
+
+$(document).ready(function () {
+    $("input").on( "change", updateFormVisibility);
+    updateFormVisibility();
 });
