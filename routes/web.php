@@ -16,11 +16,13 @@ Route::get('/', function () {
 });
 
 Route::get('/admin', 'AdminController@index');
-
-
-Route::get('/export/{id}', 'AdminController@export');
+Route::get('/events/{id}/export', 'AdminController@export');
 
 Route::resources([
     'events' => 'EventController',
     'events.registration' => 'EventRegistrationController'
 ]);
+
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');

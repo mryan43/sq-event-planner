@@ -15,6 +15,12 @@ function updateFormVisibility(){
         $("#participant-form").hide();
     }
 
+    if (participation.val() === "No"){
+        $("#field-group-2").show();
+    } else {
+        $("#field-group-2").hide();
+    }
+
     $("form input").each(function(){
         var input = $(this);
         var group = $(this).closest(".form-group");
